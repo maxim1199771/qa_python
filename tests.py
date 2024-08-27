@@ -1,50 +1,6 @@
-import collection
 import pytest
 
 from main import BooksCollector
-
-
-# класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
-# обязательно указывать префикс Test
-class TestBooksCollector:
-
-    def test_add_new_book_add_two_books(self):
-        # создаем экземпляр (объект) класса BooksCollector
-        collector = BooksCollector()
-
-        # добавляем две книги
-        collector.add_new_book('Гордость и предубеждение и зомби')
-        collector.add_new_book('Что делать, если ваш кот хочет вас убить')
-
-        # проверяем, что добавилось именно две
-        # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
-        assert len(collector.get_books_rating()) == 2
-
-    # напиши свои тесты ниже
-    # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
-
-@pytest.fixture
-def collection():
-    collection = BooksCollector()
-    return collection
-
-'''Для корректного отображения аргументов в параметризированном тесте'''
-def pytest_make_parametrize_id(val):
-    return repr(val)
-
-@pytest.fixture
-def collection_five_books(collection):
-    collect = collection
-    books = ['Властелин колец', 'Король лев', 'Чужой', 'Сон в летнюю ночь', 'Молчание ягнят']
-    genre = ['Фантастика', 'Мультфильмы', 'Ужасы', 'Комедии', 'Детективы']
-    for i in range(5):
-        collect.add_new_book(books[i])
-
-    for i in range(5):
-        collect.set_book_genre(books[i], genre[i])
-
-    return collect
-
 
 class TestBooksCollector:
     '''Проверка добавления трех книг в словарь books_genre'''
